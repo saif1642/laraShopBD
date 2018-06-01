@@ -13,7 +13,7 @@
     </head>
     <body>
         <div id="loginbox">
-        @if(Session::has('flash_message_error'))
+        @if(Session::has('flash_message_error'))     
 
          <div class="alert alert-error alert-block">
              <button type="button" class="close" data-dismiss="alert">x</button>
