@@ -12,9 +12,26 @@
 
     </head>
     <body>
-        <div id="loginbox">            
+        <div id="loginbox">
+        @if(Session::has('flash_message_error'))
+
+         <div class="alert alert-error alert-block">
+             <button type="button" class="close" data-dismiss="alert">x</button>
+             <strong>{!! Session('flash_message_error') !!}</strong>
+         </div>
+
+         @elseif(Session::has('flash_message_success'))
+
+         <div class="alert alert-success alert-block">
+             <button type="button" class="close" data-dismiss="alert">x</button>
+             <strong>{!! Session('flash_message_success') !!}</strong>
+         </div>
+        
+        @endif 
+        
+                  
         <form id="loginform" class="form-vertical" action="{{ url('admin') }}" method="post">{{ csrf_field() }}
-				 <div class="control-group normal_text"> <h3><img src="{{ asset('images/backend_images/img/logo.png') }}" alt="Logo" /></h3></div>
+				 <div class="control-group normal_text"> <h3><img src="{{ asset('images/backend_images/logo.png') }}" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
@@ -51,7 +68,8 @@
         </div>
         
         <script src="{{ asset('js/backend_js/jquery.min.js') }}"></script>  
-        <script src="{{ asset('js/backend_js/matrix.login.js') }}"></script> 
+        <script src="{{ asset('js/backend_js/matrix.login.js') }}"></script>
+        <script src="{{ asset('js/backend_js/bootstrap.min.js') }}"></script>  
     </body>
 
 </html>
