@@ -63,16 +63,22 @@ $(document).ready(function(){
 	
 	$("#password_validate").validate({
 		rules:{
-			pwd:{
+			new_pwd:{
 				required: true,
 				minlength:6,
 				maxlength:20
 			},
-			pwd2:{
+			current_pwd:{
 				required:true,
 				minlength:6,
 				maxlength:20,
-				equalTo:"#pwd"
+				
+			},
+			confirm_pwd:{
+				required:true,
+				minlength:6,
+				maxlength:20,
+				equalTo:"#new_pwd"
 			}
 		},
 		errorClass: "help-inline",
