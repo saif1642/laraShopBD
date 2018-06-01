@@ -1,6 +1,26 @@
 
 $(document).ready(function(){
 	
+	$("#new_pwd").click(function(){
+	  //alert('dddd');
+	  let current_pwd = $('#current_pwd').val();
+	  $.ajax({
+		  type:'get',
+		  url:'/admin/check-pwd',
+		  data:{current_pwd:current_pwd},
+		  success:function(resp){
+              if(resp == "false"){
+				  $('#chkPwd').html("<font color='red'>Current Password is incorrect!</font>");
+			  }else if(resp == "True"){
+				  $('#chkPwd').html("<font color='green'>Current Password is correct</font>");
+			  }
+		  },
+		  error:function(){
+			  alert("Error");
+		  }
+	  });
+	});
+	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
 	$('select').select2();
