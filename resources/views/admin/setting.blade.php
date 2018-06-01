@@ -4,6 +4,17 @@
 <div id="content-header">
   <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a><a href="#" class="current">Setting</a> </div>
   <h1>Admin Setting</h1>
+    @if(Session::has('flash_message_error'))     
+        <div class="alert alert-error alert-block">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{!! Session('flash_message_error') !!}</strong>
+        </div>
+    @elseif(Session::has('flash_message_success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{!! Session('flash_message_success') !!}</strong>
+        </div>
+    @endif 
 </div>
 <div class="container-fluid"><hr>
   <div class="row-fluid">
@@ -16,7 +27,7 @@
             <h5>Upadte Password</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="#" name="password_validate" id="password_validate" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="{{ url('/admin/update-pwd') }}" name="password_validate" id="password_validate" novalidate="novalidate">{{ csrf_field() }}
                 <div class="control-group">
                     <label class="control-label">Current password</label>
                     <div class="controls">
