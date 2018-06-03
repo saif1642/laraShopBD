@@ -111,4 +111,34 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+
+	$("#add_category").validate({
+		rules:{
+			cat_name:{
+				required: true,
+				minlength:6,
+				maxlength:20
+			},
+			cat_description:{
+				required:true,
+				minlength:6,
+				maxlength:200,
+				
+			},
+			cat_url:{
+				required:true,
+				minlength:6,
+				maxlength:50,
+			}
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
 });

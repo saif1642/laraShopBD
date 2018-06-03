@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/admin/setting','AdminController@setting');
     Route::get('/admin/check-pwd','AdminController@checkPassword');
     Route::match(['get','post'],'/admin/update-pwd','AdminController@updatePassword');
+    //ADMIN CATEGORY ROUTES
+    Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
 });
 
 
