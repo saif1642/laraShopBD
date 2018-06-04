@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function() {
     //ADMIN CATEGORY ROUTES
     Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
     Route::get('/admin/view-categories','CategoryController@viewCategories');
+    Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');
+    Route::match(['get','post'],'/admin/delete-category/{id}','CategoryController@deleteCategory');
 });
 
 
