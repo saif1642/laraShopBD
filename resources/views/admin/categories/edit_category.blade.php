@@ -35,6 +35,18 @@
                     </div>
                   </div>
 
+                 <div class="control-group">
+                    <label class="control-label">Category Level</label>
+                    <div class="controls">
+                      <select name="parent_id" style="width:220px;">
+                        <option value="0">Main Category</option>
+                          @foreach($mainCategory as $cat)
+                             <option value="{{$cat->id}}" @if($cat->id == $categoryDetail->parent_id) selected @endif>{{$cat->name}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                 </div>
+
               <div class="control-group">
                 <label class="control-label">Description</label>
                 <div class="controls">

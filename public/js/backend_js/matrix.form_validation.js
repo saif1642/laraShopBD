@@ -171,4 +171,11 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+
+	$("#del_cat").on('click',function(){
+		if(confirm('Are you sure to delete this Category!')){
+			return true;
+		}
+		return false;
+	 });
 });

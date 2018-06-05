@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-
+use Auth; 
+use Session; 
+use App\Category; 
 class CategoryController extends Controller
 {
     public function addCategory(Request $request){
@@ -12,25 +13,28 @@ class CategoryController extends Controller
             $data=$request->all();
             $category = new Category;
             $category->name = $data['cat_name'];
+            $category->parent_id = $data['parent_id'];
             $category->description = $data['cat_description'];
             $category->url = $data['cat_url'];
             $category->save();
             return redirect('/admin/view-categories')->with('flash_message_success','Category Added Successfully');
 
         }
-        return view('admin.categories.add_category');
+        $mainCategory = Category::where(['parent_id'=>0])->get();
+        return view('admin.categories.add_category')->with(compact('mainCategory'));
     }
     public function editCategory(Request $request,$id=null){
         if($request->isMethod('post')){
             $data=$request->all();
-            Category::where(['id'=>$id])->update(['name'=>$data['cat_name'],'description'=>$data['cat_description'],'url'=>$data['cat_url']]);
+            Category::where(['id'=>$id])->update(['name'=>$data['cat_name'],'description'=>$data['cat_description'],'url'=>$data['cat_url'],'parent_id'=>$data['parent_id']]);
             return redirect('/admin/view-categories')->with('flash_message_success','Category Updated Successfully');
         }
         $categoryDetail = Category::where(['id'=>$id])->first();
-        return view('admin.categories.edit_category')->with(compact('categoryDetail'));
+        $mainCategory = Category::where(['parent_id'=>0])->get();
+        return view('admin.categories.edit_category')->with(compact('categoryDetail','mainCategory'));
     }
 
-    public function deleteCategory($id=null){
+    public function deleteCategory($id){
         if(!empty($id)){
             Category::where(['id'=>$id])->delete();
             return redirect()->back()->with('flash_message_success','Category Deleted Successfully');

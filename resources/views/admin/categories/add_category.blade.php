@@ -28,13 +28,23 @@
           </div>
           <div class="widget-content nopadding">
             <form class="form-horizontal" method="post" action="{{ url('/admin/add-category') }}" name="add_category" id="add_category" novalidate="novalidate">{{ csrf_field() }}
-                <div class="control-group">
-                    <label class="control-label">Category Name</label>
-                    <div class="controls">
-                      <input type="text" name="cat_name" id="cat_name" />
-                    </div>
-                  </div>
-
+              <div class="control-group">
+                <label class="control-label">Category Name</label>
+                <div class="controls">
+                  <input type="text" name="cat_name" id="cat_name" />
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Category Level</label>
+                <div class="controls">
+                  <select name="parent_id" style="width:220px">
+                    <option value="0">Main Category</option>
+                      @foreach($mainCategory as $cat)
+                         <option value="{{$cat->id}}">{{$cat->name}}</option>
+                      @endforeach
+                  </select>
+                </div>
+              </div>
               <div class="control-group">
                 <label class="control-label">Description</label>
                 <div class="controls">
