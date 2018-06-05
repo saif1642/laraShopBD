@@ -27,11 +27,11 @@
             <h5>Add Products</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{ url('/admin/add-product') }}" name="add_product" id="add_product" novalidate="novalidate">{{ csrf_field() }}
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('/admin/add-product') }}" name="add_product" id="add_product" novalidate="novalidate">{{ csrf_field() }}
                 <div class="control-group">
                     <label class="control-label">Product Category</label>
                     <div class="controls">
-                        <select name="category_id" style="width:220px;">
+                        <select name="category_id" id="category_id" style="width:220px;">
                          <?php echo $categoryDropdownMenu; ?>
                         </select>
                     </div>
