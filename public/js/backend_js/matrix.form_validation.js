@@ -211,6 +211,44 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#edit_product").validate({
+		rules:{
+			category_id:{
+                required: true
+			},
+			product_name:{
+				required: true,
+				minlength:3,
+				maxlength:20
+			},
+			product_code:{
+				required:true,
+				minlength:3,
+				maxlength:50,
+			},
+			product_color:{
+				required:true,
+				minlength:3,
+				maxlength:50,
+			},
+			price:{
+				required:true,
+				number:true
+			}
+			
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
+
+
 	$("#del_cat").on('click',function(){
 		if(confirm('Are you sure to delete this Category!')){
 			return true;

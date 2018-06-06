@@ -69,6 +69,47 @@ class ProductsController extends Controller
         return view('admin.products.add_product')->with(compact('categoryDropdownMenu'));
     }
 
+    public function editProduct(Request $request ,$id=null){
+      
+        $product_details = Product::where(['id'=>$id])->first();
+        
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //echo "<Pre>"; print_r($data);die;
+            Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name']
+            ,'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
+            ,'description'=>$data['description']]);
+
+            return redirect()->back()->with('flash_message_success','Product Updated Successfully');
+        }
+
+
+
+         //Category Dropdown Menu
+        $categories = Category::where(['parent_id'=>0])->get();
+        $categoryDropdownMenu = "<option selected disabled>Select</option>";
+        foreach($categories as $cat){
+            if($cat->id == $product_details->category_id){
+                $selected = "selected";
+            }else{
+                $selected = "";
+            }
+            $categoryDropdownMenu .= "<option value='".$cat->id."' ".$selected.">".$cat->name."</option>";
+            $subcategories = Category::where(['parent_id'=>$cat->id])->get();
+            foreach($subcategories as $subcat){
+                if($subcat->id == $product_details->category_id){
+                    $selected = "selected";
+                }else{
+                    $selected = "";
+                }
+                $categoryDropdownMenu .= "<option value='".$subcat->id."' ".$selected.">&nbsp; --&nbsp;".$subcat->name."</option>";
+                
+            }
+            
+        }
+
+        return view('admin.products.edit_product')->with(compact('product_details','categoryDropdownMenu'));
+    }
     public function viewProducts(){
         $products = Product::get();
         foreach($products as $key => $val){

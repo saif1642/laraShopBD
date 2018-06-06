@@ -37,6 +37,7 @@
                     <th>Product Color</th>
                     <th>Product Code</th>
                     <th>Product Price</th>
+                    <th>Product Image</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -53,8 +54,24 @@
                     <td>
                       <img src="{{asset('/images/backend_images/products/small/'.$product->image)}}" alt="product image" width="60px" height="60px">
                     </td>
-                    <td class="center"><a href="{{url('/admin/edit-product/'.$product->id)}}" class="btn btn-primary btn-mini">Edit</a> <a id="del_cat" href="{{url('/admin/delete-product/'.$product->id)}}" class="btn btn-danger btn-mini">Delete</a></td>
+                    <td class="center"><a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a> <a href="{{url('/admin/edit-product/'.$product->id)}}" class="btn btn-primary btn-mini">Edit</a> <a id="del_cat" href="{{url('/admin/delete-product/'.$product->id)}}" class="btn btn-danger btn-mini">Delete</a></td>
                   </tr>
+                    <div id="myModal{{ $product->id }}" class="modal hide">
+                      <div class="modal-header">
+                        <button data-dismiss="modal" class="close" type="button">×</button>
+                        <h2>{{ $product->product_name }} Details</h2>
+                      </div>
+                      <div class="modal-body">
+                        <p><span style="font-weight:bold;">Product ID:</span> {{ $product->id }}</p>
+                        <p><span style="font-weight:bold;">Category ID:</span> {{ $product->category_id }}</p>
+                        <p><span style="font-weight:bold;">Category:</span> {{ $product->category }}</p>
+                        <p><span style="font-weight:bold;">Product Name:</span> {{ $product->product_name }}</p>
+                        <p><span style="font-weight:bold;">Product Color:</span> {{ $product->product_color }}</p>
+                        <p><span style="font-weight:bold;">Product Code:</span> {{ $product->product_code }}</p>
+                        <p><span style="font-weight:bold;">Price:</span> ${{ $product->price }}</p>
+                        <p><span style="font-weight:bold;">Description:</span> {{ $product->description }}</p>
+                      </div>
+                    </div>
                 @endforeach
                 </tbody>
               </table>
@@ -63,7 +80,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-
+</div>
 @endsection
+
