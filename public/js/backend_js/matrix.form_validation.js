@@ -255,4 +255,21 @@ $(document).ready(function(){
 		}
 		return false;
 	 });
+
+	 $('.deleteRecord').click(function(e){
+		 let id = $(this).attr('rel');
+		 let deleteFunction = $(this).attr('rel1');
+		 swal({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, delete it!',
+			cancelButtonClass: 'btn btn-default',
+			confirmButtonClass: 'btn btn-danger',
+		  },function(){
+             window.location.href = "/admin/"+deleteFunction+"/"+id;
+		  })
+		 
+	 });
 });

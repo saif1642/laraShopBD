@@ -76,9 +76,35 @@ class ProductsController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             //echo "<Pre>"; print_r($data);die;
+             //Image Upload
+             if($request->hasFile('image')){
+                $image_temp = Input::file('image');
+                if($image_temp->isValid()){
+                    $extension = $image_temp->getClientOriginalExtension();
+                    $filename = rand(111,99999).'.'.$extension;
+                    $largeImagePath = 'images/backend_images/products/large/'.$filename;
+                    $mediumImagePath = 'images/backend_images/products/medium/'.$filename;
+                    $smallImagePath = 'images/backend_images/products/small/'.$filename;
+
+                    //Resize Image
+                    Image::make($image_temp)->save($largeImagePath);
+                    Image::make($image_temp)->resize(600,600)->save($mediumImagePath );
+                    Image::make($image_temp)->resize(300,300)->save($smallImagePath);
+
+                }else{
+                    $filename = $data['current_image'];
+                }
+                
+            }
+
+            if(empty($data['description'])){
+                $data['description'] = "";
+            }
+            
+
             Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name']
             ,'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
-            ,'description'=>$data['description']]);
+            ,'description'=>$data['description'],'image'=>$filename]);
 
             return redirect()->back()->with('flash_message_success','Product Updated Successfully');
         }
@@ -117,5 +143,15 @@ class ProductsController extends Controller
             $products[$key]->category = $category->name;
         }
         return view('admin.products.view_products')->with(compact('products'));
+    }
+
+    public function deleteProductImage($id=null){
+        Product::where(['id'=>$id])->update(['image'=>'']);
+        return redirect()->back()->with('flash_message_success',' Product Image Deleted Successfully');
+    }
+
+    public function deleteProduct($id = null){
+        Product::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success',' Product Deleted Successfully');
     }
 }
