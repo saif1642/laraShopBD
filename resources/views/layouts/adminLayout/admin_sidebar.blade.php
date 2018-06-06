@@ -13,7 +13,7 @@
       <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span> <span class="label label-important">3</span></a>
         <ul>
           <li><a href="{{ url('/admin/add-product') }}">Add Product</a></li>
-          <li><a href="{{ url('/admin/edit-product') }}">Edit Product</a></li>
+          <li><a href="{{ url('/admin/view-product') }}">View Products</a></li>
         </ul>
       </li>
       <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>
