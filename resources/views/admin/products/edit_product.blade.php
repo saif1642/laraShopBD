@@ -66,12 +66,11 @@
                             <input type="text" name="price" id="price" value="{{ $product_details->price }}"/>
                         </div>
                 </div>
+                <input type="hidden" name="current_image" value="{{ $product_details->image }}">
                 <div class="control-group">
-                        <label class="control-label">Image</label>
+                        <label class="control-label">Image {{ $product_details->image }}</label>
                         <div class="controls">
                             <input type="file" name="image" id="image" />
-                            <input type="hidden" name="current_image" value="{{ $product_details->image }}">
-                           
                             <img style="width:40px;" src="{{asset('/images/backend_images/products/small/'.$product_details->image)}}" alt="product image"> | 
                             <a href="{{ url('/admin/delete-product-image/'.$product_details->id) }}">Delete</a>
                         </div>

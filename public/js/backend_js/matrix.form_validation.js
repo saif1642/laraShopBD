@@ -234,6 +234,9 @@ $(document).ready(function(){
 			price:{
 				required:true,
 				number:true
+			},
+			image:{
+				required:true
 			}
 			
 		},
