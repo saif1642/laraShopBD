@@ -10,7 +10,7 @@
           
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span> <span class="label label-important">3</span></a>
+      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span> <span class="label label-important">2</span></a>
         <ul>
           <li><a href="{{ url('/admin/add-product') }}">Add Product</a></li>
           <li><a href="{{ url('/admin/view-product') }}">View Products</a></li>

@@ -30,11 +30,11 @@
             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('/admin/add-product') }}" name="add_product" id="add_product" novalidate="novalidate">{{ csrf_field() }}
                 <div class="control-group">
                     <label class="control-label">Product Category</label>
-                    <div class="controls">
-                        <select name="category_id" id="category_id" style="width:220px;">
-                         <?php echo $categoryDropdownMenu; ?>
-                        </select>
-                    </div>
+                        <div class="controls">
+                            <select name="category_id" id="category_id" style="width:220px;">
+                             <?php echo $categoryDropdownMenu; ?>
+                            </select>
+                        </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Product Name</label>

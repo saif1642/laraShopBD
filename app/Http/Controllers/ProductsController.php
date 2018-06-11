@@ -7,7 +7,9 @@ use Auth;
 use Session; 
 use App\Category; 
 use App\Product;
-use Image; 
+use App\ProductsAttribute;
+use Image;
+ 
 
 class ProductsController extends Controller
 {
@@ -153,5 +155,27 @@ class ProductsController extends Controller
     public function deleteProduct($id = null){
         Product::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success',' Product Deleted Successfully');
+    }
+
+    public function addAttributes (Request $request ,$id = null){
+        $product_details = Product::where(['id'=>$id])->first();
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //echo "<Pre>"; print_r($data);die;
+            foreach($data['sku'] as $key => $val){
+                if(!empty($val)){
+                    $attribute = new ProductsAttribute;
+                    $attribute->sku = $val;
+                    $attribute->product_id = $id;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->save();
+                }
+            }
+            return redirect('admin/add-attributes/'.$id)->with('flash_message_success',' Product Attribues added Successfully');
+
+        }
+        return view('admin.products.add_attributes')->with(compact('product_details'));
     }
 }
