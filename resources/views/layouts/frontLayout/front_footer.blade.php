@@ -16,7 +16,7 @@
                                     <img src="{{ asset('images/frontend_images/home/iframe1.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
+                                    <i class="fas fa-play-circle"></i>
                                 </div>
                             </a>
                             <p>Circle of Hands</p>
@@ -31,7 +31,7 @@
                                     <img src="{{ asset('images/frontend_images/home/iframe2.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
+                                    <i class="fas fa-play-circle"></i>
                                 </div>
                             </a>
                             <p>Circle of Hands</p>
@@ -46,7 +46,7 @@
                                     <img src="{{ asset('images/frontend_images/home/iframe3.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
+                                    <i class="fas fa-play-circle"></i>
                                 </div>
                             </a>
                             <p>Circle of Hands</p>
@@ -61,7 +61,7 @@
                                     <img src="{{ asset('images/frontend_images/home/iframe4.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
-                                    <i class="fas fa-play-circle-o"></i>
+                                    <i class="fas fa-play-circle"></i>
                                 </div>
                             </a>
                             <p>Circle of Hands</p>

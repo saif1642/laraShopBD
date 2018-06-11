@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
     <!--[if lt IE 9]>
-    <script src="{{ asset('js/backend_js/js/html5shiv.js') }}"></script>
-    <script src="{{ asset('js/backend_js/js/respond.min.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/js/html5shiv.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/js/respond.min.js') }}"></script>
     <![endif]-->       
     <link rel="shortcut icon" href="{{ asset('images/frontend_images/ico/favicon.ico') }}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('images/frontend_images/ico/apple-touch-icon-144-precomposed.png') }}">
@@ -35,11 +35,11 @@
         @include('layouts.frontLayout.front_footer')
         
 
-    <script src="{{ asset('js/backend_js/jquery.js') }}"></script>
-    <script src="{{ asset('js/backend_js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/backend_js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('js/backend_js/price-range.js') }}"></script>
-    <script src="{{ asset('js/backend_js/jquery.prettyPhoto.js') }}"></script>
-    <script src="{{ asset('js/backend_js/main.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/jquery.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/price-range.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/main.js') }}"></script>
 </body>
 </html>
