@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/','IndexController@index');
 
 Route::get('/admin','AdminController@login');
 Route::match(['get','post'],'/admin','AdminController@login');
@@ -39,6 +41,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     //PRODUCT ATTRIIBUTE ROUTE
     Route::match(['get','post'],'admin/add-attributes/{id}','ProductsController@addAttributes');
+    Route::get('/admin/delete-attributes/{id}','ProductsController@deleteAttributes');
+
 });
 
 
