@@ -185,5 +185,14 @@ class ProductsController extends Controller
         return redirect()->back()->with('flash_message_success',' Product Attributes deleted Successfully');
     }
 
+    public function productWithCategoryURL($url = null){
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+        $category = Category::where(['url'=>$url])->first();
+
+        $productInfo = Product::where(['category_id'=>$category->id])->get();
+
+        return view('products.listing')->with(compact('categories','category','productInfo'));
+    }
+
     
 }

@@ -19,6 +19,8 @@ Route::get('/','IndexController@index');
 
 Route::get('/admin','AdminController@login');
 Route::match(['get','post'],'/admin','AdminController@login');
+//Category Listing page
+Route::get('/products/{url}','ProductsController@productWithCategoryURL');
 
 Auth::routes();
 
