@@ -197,8 +197,13 @@ class ProductsController extends Controller
                 $cat_ids[] = $subcat->id; 
             }
             //echo "<pre>";print_r($cat_ids);die;
-            $productInfo = Product::whereIn('category_id',$cat_ids)->get();
-            $productInfo = json_decode(json_encode($productInfo));
+            if(!empty($cat_ids)){
+                $productInfo = Product::whereIn('category_id',$cat_ids)->get();
+                $productInfo = json_decode(json_encode($productInfo));
+            }else{
+                $productInfo = Product::where(['category_id'=>$category->id])->get();
+            }
+            
             //echo "<pre>";print_r($productInfo);die;
         }else{
             //if the URL is sub category url
