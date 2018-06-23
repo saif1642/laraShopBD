@@ -189,7 +189,23 @@ class ProductsController extends Controller
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
         $category = Category::where(['url'=>$url])->first();
 
-        $productInfo = Product::where(['category_id'=>$category->id])->get();
+        if($category->parent_id==0){
+            //if the URL is main category url
+            $subcategories = Category::where(['parent_id'=>$category->id])->get();
+            //$cat_ids = "";
+            foreach($subcategories as $subcat){
+                $cat_ids[] = $subcat->id; 
+            }
+            //echo "<pre>";print_r($cat_ids);die;
+            $productInfo = Product::whereIn('category_id',$cat_ids)->get();
+            $productInfo = json_decode(json_encode($productInfo));
+            //echo "<pre>";print_r($productInfo);die;
+        }else{
+            //if the URL is sub category url
+            $productInfo = Product::where(['category_id'=>$category->id])->get();
+        }
+
+       
 
         return view('products.listing')->with(compact('categories','category','productInfo'));
     }
