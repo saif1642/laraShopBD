@@ -216,6 +216,7 @@ class ProductsController extends Controller
         if($categoryCount==0){
             abort('404');
         }
+        //get categories and subcategories
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
         $category = Category::where(['url'=>$url])->first();
 
@@ -243,6 +244,16 @@ class ProductsController extends Controller
        
 
         return view('products.listing')->with(compact('categories','category','productInfo'));
+    }
+
+    public function product($id = null){
+        $productDetail = Product::where(['id'=>$id])->first();
+
+        //get categories and subcategories
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+
+        return view('products.detail')->with(compact('productDetail','categories'));
+
     }
 
     

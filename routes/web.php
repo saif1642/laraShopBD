@@ -22,6 +22,9 @@ Route::match(['get','post'],'/admin','AdminController@login');
 //Category Listing page
 Route::get('/products/{url}','ProductsController@productWithCategoryURL');
 
+//Product Detail Page
+Route::get('product/{id}','ProductsController@product');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
