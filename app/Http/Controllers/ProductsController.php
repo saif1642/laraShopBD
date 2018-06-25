@@ -187,7 +187,7 @@ class ProductsController extends Controller
 
     public function productWithCategoryURL($url = null){
         //Display 404 page
-        $categoryCount = Category::where(['url'=>$url])->count();
+        $categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
         //echo "<pre>";print_r($categoryCount);die;
         if($categoryCount==0){
             abort('404');

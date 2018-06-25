@@ -11,11 +11,20 @@ class CategoryController extends Controller
     public function addCategory(Request $request){
         if($request->isMethod('post')){
             $data=$request->all();
+
+
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+
             $category = new Category;
             $category->name = $data['cat_name'];
             $category->parent_id = $data['parent_id'];
             $category->description = $data['cat_description'];
             $category->url = $data['cat_url'];
+            $category->status = $status;
             $category->save();
             return redirect('/admin/view-categories')->with('flash_message_success','Category Added Successfully');
 
@@ -26,7 +35,13 @@ class CategoryController extends Controller
     public function editCategory(Request $request,$id=null){
         if($request->isMethod('post')){
             $data=$request->all();
-            Category::where(['id'=>$id])->update(['name'=>$data['cat_name'],'description'=>$data['cat_description'],'url'=>$data['cat_url'],'parent_id'=>$data['parent_id']]);
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            Category::where(['id'=>$id])->update(['name'=>$data['cat_name'],'description'=>$data['cat_description'],
+            'url'=>$data['cat_url'],'parent_id'=>$data['parent_id'],'status'=>$status]);
             return redirect('/admin/view-categories')->with('flash_message_success','Category Updated Successfully');
         }
         $categoryDetail = Category::where(['id'=>$id])->first();
