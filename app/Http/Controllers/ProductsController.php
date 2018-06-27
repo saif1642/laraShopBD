@@ -31,6 +31,11 @@ class ProductsController extends Controller
             }else{
                 $product->description = "";
             }
+            if(!empty($data['care'])){
+                $product->care = $data['care'];
+            }else{
+                $product->care = "";
+            }
             //Image Upload
             if($request->hasFile('image')){
                 $image_temp = Input::file('image');
@@ -102,11 +107,14 @@ class ProductsController extends Controller
             if(empty($data['description'])){
                 $data['description'] = "";
             }
+            if(empty($data['care'])){
+                $data['care'] = "";
+            }
             
 
             Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name']
             ,'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
-            ,'description'=>$data['description'],'image'=>$filename]);
+            ,'description'=>$data['description'],'care'=>$data['care'],'image'=>$filename]);
 
             return redirect()->back()->with('flash_message_success','Product Updated Successfully');
         }
@@ -139,7 +147,7 @@ class ProductsController extends Controller
         return view('admin.products.edit_product')->with(compact('product_details','categoryDropdownMenu'));
     }
     public function viewProducts(){
-        $products = Product::get();
+        $products = Product::orderBy('id','DESC')->get();
         foreach($products as $key => $val){
             $category = Category::where(['id'=>$val->category_id])->first();
             $products[$key]->category = $category->name;
