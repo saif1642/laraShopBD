@@ -77,9 +77,17 @@
                             <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                             <h2>{{ $productDetail->product_name }}</h2>
                             <p>Web ID: {{ $productDetail->product_code }}</p>
+                            <p>
+                                <select id="selSize" name="size" style="width:150px">
+                                    <option value="">Select</option>
+                                    @foreach($productDetail->attributes as $attribute)
+                                       <option value="{{ $productDetail->id}}-{{$attribute->size}}">{{$attribute->size}}</option>
+                                    @endforeach
+                                </select>
+                            </p>
                             <img src="images/product-details/rating.png" alt="" />
                             <span>
-                                <span>US ${{ $productDetail->price }}</span>
+                                <span id="getPrice">US ${{ $productDetail->price }}</span>
                                 <label>Quantity:</label>
                                 <input type="text" value="3" />
                                 <button type="button" class="btn btn-fefault cart">

@@ -28,3 +28,24 @@ $(document).ready(function(){
 		});
 	});
 });
+
+//Select Product Size
+
+$(document).ready(function(){
+  
+	$('#selSize').change(function(){
+		let idSize= $(this).val();
+		$.ajax({
+			type:'get',
+			url:'/get-product-price',
+			data:{idSize:idSize},
+			success:function(resp){
+				 //alert(resp);
+				 $('#getPrice').html("US $"+resp);
+			},error:function(){
+				alert("Error");
+			}
+		})		
+		
+	});
+});
