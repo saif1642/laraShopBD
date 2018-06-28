@@ -41,7 +41,16 @@ $(document).ready(function(){
 			data:{idSize:idSize},
 			success:function(resp){
 				 //alert(resp);
-				 $('#getPrice').html("US $"+resp);
+				 let arr = resp.split('#');
+				 $('#getPrice').html("US $"+arr[0]);
+				 $('#price').val(arr[0]);
+				 if(arr[1]==0){
+					 $('#cartbtn').hide();
+					 $('#availability').text('Out of Stock');
+				 }else{
+					$('#cartbtn').show();
+					$('#availability').text('In Stock');
+				 }
 			},error:function(){
 				alert("Error");
 			}

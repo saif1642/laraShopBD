@@ -41,33 +41,41 @@
 
                     </div>
                     <div class="col-sm-7">
-                        <div class="product-information"><!--/product-information-->
-                            <img src="images/product-details/new.jpg" class="newarrival" alt="" />
-                            <h2>{{ $productDetail->product_name }}</h2>
-                            <p>Web ID: {{ $productDetail->product_code }}</p>
-                            <p>
-                                <select id="selSize" name="size" style="width:150px">
-                                    <option value="">Select</option>
-                                    @foreach($productDetail->attributes as $attribute)
-                                       <option value="{{ $productDetail->id}}-{{$attribute->size}}">{{$attribute->size}}</option>
-                                    @endforeach
-                                </select>
-                            </p>
-                            <img src="images/product-details/rating.png" alt="" />
-                            <span>
-                                <span id="getPrice">US ${{ $productDetail->price }}</span>
-                                <label>Quantity:</label>
-                                <input type="text" value="3" />
-                                <button type="button" class="btn btn-fefault cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    Add to cart
-                                </button>
-                            </span>
-                            <p><b>Availability:</b> In Stock</p>
-                            <p><b>Condition:</b> New</p>
-                            <p><b>Brand:</b> E-SHOPPER</p>
-                            <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
-                        </div><!--/product-information-->
+                        <form name="addcartform" id="addcartform" action="{{url('add-cart')}}" method="POST">{{ csrf_field() }}
+                            <input type="hidden" name="product_id" value="{{ $productDetail->id }}">
+                            <input type="hidden" name="product_name" value="{{ $productDetail->product_name }}">
+                            <input type="hidden" name="product_code" value="{{ $productDetail->product_code }}">
+                            <input type="hidden" name="product_color" value="{{ $productDetail->product_color }}">
+                            <input type="hidden" name="price" id="price" value="{{ $productDetail->price }}">
+
+                            <div class="product-information"><!--/product-information-->
+                                <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+                                <h2>{{ $productDetail->product_name }}</h2>
+                                <p>Product ID: {{ $productDetail->product_code }}</p>
+                                <p>
+                                    <select id="selSize" name="size" style="width:150px">
+                                        <option value="">Select</option>
+                                        @foreach($productDetail->attributes as $attribute)
+                                        <option value="{{ $productDetail->id}}-{{$attribute->size}}">{{$attribute->size}}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
+                                <img src="images/product-details/rating.png" alt="" />
+                                <span>
+                                    <span id="getPrice">US ${{ $productDetail->price }}</span>
+                                    <label>Quantity:</label>
+                                    <input type="text" name="quantity" value="1" />
+                                    <button type="submit" class="btn btn-fefault cart" id="cartbtn">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button>
+                                </span>
+                                <p id="availability"><b>Availability:</b> In Stock</p>
+                                <p><b>Condition:</b> New</p>
+                                <p><b>Brand:</b> E-SHOPPER</p>
+                                <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+                            </div><!--/product-information-->
+                        </form>
                     </div>
                 </div><!--/product-details-->
                 
