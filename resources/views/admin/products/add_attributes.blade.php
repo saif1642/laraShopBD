@@ -71,35 +71,38 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Attributes Table</h5>
+            <h5>View Attributes</h5>
           </div>
           <div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
-              <thead>
-                <tr>
-                  <th>Attribute ID</th>
-                  <th>SKU</th>
-                  <th>Size</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-              @foreach($product_attributes as $pa)
-                <tr class="gradeX">
-                  <td>{{ $pa->id }}</td>
-                  <td>{{ $pa->sku }}</td>
-                  <td>{{ $pa->size }}</td>
-                  <td>{{ $pa->price }}</td>
-                  <td>{{ $pa->stock }}</td>
-                  <td class="center"> 
-                       <a rel="{{ $pa->id }}" rel1="delete-attributes"  href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
-                  </td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
+            <form action="{{url('/admin/edit-attributes/'.$product_details->id)}}" method="post">{{ csrf_field() }}
+              <table class="table table-bordered data-table">
+                <thead>
+                  <tr>
+                    <th>Attribute ID</th>
+                    <th>SKU</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($product_attributes as $pa)
+                  <tr class="gradeX">
+                    <td> <input type="hidden" name="attrIds[]" value="{{ $pa->id }}">{{ $pa->id }}</td>
+                    <td>{{ $pa->sku }}</td>
+                    <td>{{ $pa->size }}</td>
+                    <td><input type="text" name="price[]" value="{{ $pa->price}}"></td>
+                    <td><input type="text" name="stock[]" value="{{ $pa->stock }}"></td>
+                    <td class="center"> 
+                          <input type="submit" value="Update" class="btn btn-primary btn-mini">
+                          <a rel="{{ $pa->id }}" rel1="delete-attributes"  href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+          </form>
           </div>
         </div>
       </div>

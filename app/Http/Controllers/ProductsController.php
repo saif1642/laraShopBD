@@ -227,6 +227,17 @@ class ProductsController extends Controller
         return view('admin.products.add_attributes')->with(compact('product_details','product_attributes'));
     }
 
+    public function editAttributes(Request $request,$id = null){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //echo "<pre>";print_r($data);die;
+            foreach($data['attrIds'] as $key=>$attr){
+                ProductsAttribute::where(['id'=>$data['attrIds'][$key]])->update(['price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]);
+            }
+            return redirect()->back()->with('flash_message_success',' Product Attribues Updated Successfully');
+        }
+    }
+
     public function deleteAttributes($id = null){
         ProductsAttribute::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success',' Product Attributes deleted Successfully');
@@ -366,5 +377,7 @@ class ProductsController extends Controller
         ProductImages::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success',' Product Alternate Image(s) Deleted Successfully');
     }
+
+   
     
 }
