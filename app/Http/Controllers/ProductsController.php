@@ -283,16 +283,22 @@ class ProductsController extends Controller
     public function product($id = null){
         $productDetail = Product::with('attributes')->where(['id'=>$id])->first();
         $productDetail = json_decode(json_encode($productDetail));
-        //echo "<pre>";print_r($productDetail);die;
+
+        //get related products
+        $relatedProducts = Product::where('id','!=',$id)->where(['category_id'=>$productDetail->category_id])->get();
+        //$relatedProducts = json_decode(json_encode($relatedProducts));
+        //echo "<pre>";print_r($relatedProducts);die;
+       
         //get categories and subcategories
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
 
          //Get Product Alternate Image
          $productImages = ProductImages::where(['product_id'=>$id])->get();
+         
         //echo "<pre>";print_r($productImage);die;
 
 
-        return view('products.detail')->with(compact('productDetail','categories','productImages'));
+        return view('products.detail')->with(compact('productDetail','categories','productImages','relatedProducts'));
 
     }
 
