@@ -45,11 +45,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/admin/view-product','ProductsController@viewProducts');
     Route::match(['get','post'],'/admin/edit-product/{id}','ProductsController@editProduct');
     Route::get('/admin/delete-product-image/{id}','ProductsController@deleteProductImage');
+    Route::get('/admin/delete-alt-image/{id}','ProductsController@deleteAltImage');
     Route::get('/admin/delete-product/{id}','ProductsController@deleteProduct');
 
     //PRODUCT ATTRIIBUTE ROUTE
     Route::match(['get','post'],'admin/add-attributes/{id}','ProductsController@addAttributes');
     Route::get('/admin/delete-attributes/{id}','ProductsController@deleteAttributes');
+
+    //ADD PRODUCT MULTIPLE IMAGE
+    Route::match(['get','post'],'admin/add-images/{id}','ProductsController@addImages');
 
 });
 
