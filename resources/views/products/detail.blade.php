@@ -12,29 +12,22 @@
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img src="{{ asset('images/backend_images/products/medium/'.$productDetail->image) }}" alt="" />
-                            
+                            <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+                                <a href="{{ asset('images/backend_images/products/large/'.$productDetail->image) }}" data-standard="{{asset('/images/backend_images/products/small/'.$productDetail->image)}}">
+                                    <img style="width: 300px;" class="mainImage" src="{{ asset('images/backend_images/products/medium/'.$productDetail->image) }}" alt="" />
+                                </a>
+                            </div>
                         </div>
-                        <div id="similar-product" class="carousel slide" data-ride="carousel">
-                            
+                        <div id="similar-product" class="carousel slide" data-ride="carousel">  
                               <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
-                                    <div class="item active">
-                                      <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                                      <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                                      <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="item">
-                                      <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                                      <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                                      <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="item">
-                                      <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                                      <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                                      <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-                                    </div>
-                                    
+                                    <div class="item active thumbnails">
+                                      @foreach($productImages as $image)
+                                        <a href="{{asset('/images/backend_images/products/large/'.$image->image)}}" data-standard="{{asset('/images/backend_images/products/small/'.$image->image)}}">
+                                            <img class="changeImage" style="width:80px;cursor:pointer;"  src="{{asset('/images/backend_images/products/small/'.$image->image)}}" alt="product image">
+                                        </a>
+                                      @endforeach
+                                    </div>                          
                                 </div>
 
                               <!-- Controls -->
