@@ -21,11 +21,17 @@ class ProductsController extends Controller
             if(empty($data['category_id'])){
                 return redirect()->back()->with('flash_message_error','Category not selected!!');
             }
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
             $product = new Product;
             $product->category_id = $data['category_id'];
             $product->product_name = $data['product_name'];
             $product->product_code = $data['product_code'];
             $product->product_color = $data['product_color'];
+            $product->status = $status;
             $product->price = $data['price'];
             if(!empty($data['description'])){
                 $product->description = $data['description'];
@@ -37,6 +43,7 @@ class ProductsController extends Controller
             }else{
                 $product->care = "";
             }
+
             //Image Upload
             if($request->hasFile('image')){
                 $image_temp = Input::file('image');
@@ -104,6 +111,11 @@ class ProductsController extends Controller
                 }
                 
             }
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
 
             if(empty($data['description'])){
                 $data['description'] = "";
@@ -111,11 +123,13 @@ class ProductsController extends Controller
             if(empty($data['care'])){
                 $data['care'] = "";
             }
-            
+            if(empty($filename)){
+                $filename = "noimage.png";
+            }
 
             Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name']
             ,'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
-            ,'description'=>$data['description'],'care'=>$data['care'],'image'=>$filename]);
+            ,'description'=>$data['description'],'care'=>$data['care'],'image'=>$filename,'status'=>$status]);
 
             return redirect()->back()->with('flash_message_success','Product Updated Successfully');
         }
@@ -281,6 +295,15 @@ class ProductsController extends Controller
     }
 
     public function product($id = null){
+
+        //Show 404 Page for disabled product id
+        $productCount = Product::where(['id'=>$id,'status'=>1])->count();
+
+        if($productCount == 0){
+            abort(404);
+        }
+
+
         $productDetail = Product::with('attributes')->where(['id'=>$id])->first();
         $productDetail = json_decode(json_encode($productDetail));
 
