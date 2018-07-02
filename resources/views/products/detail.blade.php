@@ -65,10 +65,14 @@
                                     <span id="getPrice">US ${{ $productDetail->price }}</span>
                                     <label>Quantity:</label>
                                     <input type="text" name="quantity" value="1" />
+                                    @if($total_stock>0)
                                     <button type="submit" class="btn btn-fefault cart" id="cartbtn">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to cart
                                     </button>
+                                    @else
+                                     <p>Out of Stock</p>
+                                    @endif
                                 </span>
                                 <p id="availability"><b>Availability:</b> In Stock</p>
                                 <p><b>Condition:</b> New</p>

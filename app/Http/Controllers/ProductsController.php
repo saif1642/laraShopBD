@@ -238,7 +238,7 @@ class ProductsController extends Controller
             return redirect('admin/add-attributes/'.$id)->with('flash_message_success',' Product Attribues added Successfully');
 
         }
-        $product_attributes = ProductsAttribute::get();
+        $product_attributes = ProductsAttribute::where('product_id',$id)->get();
         return view('admin.products.add_attributes')->with(compact('product_details','product_attributes'));
     }
 
@@ -321,8 +321,11 @@ class ProductsController extends Controller
          
         //echo "<pre>";print_r($productImage);die;
 
+        //Get total stock
+        $total_stock = ProductsAttribute::where(['product_id'=>$id])->sum('stock');
 
-        return view('products.detail')->with(compact('productDetail','categories','productImages','relatedProducts'));
+
+        return view('products.detail')->with(compact('productDetail','categories','productImages','relatedProducts','total_stock'));
 
     }
 
@@ -335,6 +338,8 @@ class ProductsController extends Controller
         $productAttribute = ProductsAttribute::where(['product_id'=>$productArr[0],'size'=>$productArr[1]])->first();
 
         echo $productAttribute->price;
+        echo '#';
+        echo $productAttribute->stock;
     }
 
     public function addImages(Request $request,$id = null){
@@ -413,14 +418,25 @@ class ProductsController extends Controller
         if(empty($data['user_email'])){
             $data['user_email']="";
         }
-        if(empty($data['session_id'])){
-            $data['session_id']="";
-        }
+        $session_id = Session::get('session_id');
+        if(empty($session_id)){
+            $session_id = str_random(40); 
+            Session::put('session_id',$session_id);
+        } 
         $sizeArr = explode("-",$data['size']);
         DB::table('cart')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],
         'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
-        ,'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],'session_id'=>$data['session_id']]);
+        ,'size'=>$sizeArr['1'],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
         //echo "<pre>";print_r($data);die;
+        return redirect('cart')->with('flash_message_success','Product has been added in cart');
+        
+    }
+
+    public function cart(){
+        $session_id = Session::get('session_id'); 
+        $userCart = DB::table('cart')->where(['session_id'=>$session_id])->get();
+        //echo "<pre>";print_r($userCart);die;
+        return view('products.cart')->with(compact('userCart')); 
     }
 
    
