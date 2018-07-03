@@ -436,7 +436,16 @@ class ProductsController extends Controller
         $session_id = Session::get('session_id'); 
         $userCart = DB::table('cart')->where(['session_id'=>$session_id])->get();
         //echo "<pre>";print_r($userCart);die;
+        foreach($userCart as $key=>$product){
+            $productDetails = Product::where('id',$product->product_id)->first();
+            $userCart[$key]->image = $productDetails->image;
+        }
         return view('products.cart')->with(compact('userCart')); 
+    }
+
+    public function deleteCartProduct($id = null){
+        DB::table('cart')->where('id',$id)->delete();
+        return redirect('cart')->with('flash_message_success','Item has been deleted from cart');
     }
 
    
