@@ -424,11 +424,22 @@ class ProductsController extends Controller
             Session::put('session_id',$session_id);
         } 
         $sizeArr = explode("-",$data['size']);
-        DB::table('cart')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],
+        $countProducts = DB::table('cart')->where(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],
         'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
-        ,'size'=>$sizeArr['1'],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
+        ,'size'=>$sizeArr['1'],'session_id'=>$session_id])->count();
+
+        if($countProducts>0){
+            return redirect()->back()->with('flash_message_error','Product already exists in the cart!');
+        }else{
+            DB::table('cart')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],
+            'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'price'=>$data['price']
+            ,'size'=>$sizeArr['1'],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
+        }
+        
         //echo "<pre>";print_r($data);die;
         return redirect('cart')->with('flash_message_success','Product has been added in cart');
+
+        
         
     }
 
@@ -446,6 +457,11 @@ class ProductsController extends Controller
     public function deleteCartProduct($id = null){
         DB::table('cart')->where('id',$id)->delete();
         return redirect('cart')->with('flash_message_success','Item has been deleted from cart');
+    }
+
+    public function updateCartQuantity($id = null , $quantity = null){
+        DB::table('cart')->where('id',$id)->increment('quantity',$quantity);
+        return redirect('cart')->with('flash_message_success','Peoduct quantity from cart successfully updated');
     }
 
    

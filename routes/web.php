@@ -35,11 +35,14 @@ Route::match(['get', 'post'], '/cart','ProductsController@cart');
 //Delete to cart item
 Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
 
+//Update Quantity
+Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');
+
 
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/dashboard','AdminController@dashboard');
     Route::get('/admin/setting','AdminController@setting');
     Route::get('/admin/check-pwd','AdminController@checkPassword');
@@ -71,3 +74,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'AdminController@logout');
+
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
