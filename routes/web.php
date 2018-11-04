@@ -17,7 +17,7 @@
 
 Route::get('/','IndexController@index');
 
-Route::get('/admin','AdminController@login');
+//Route::get('/admin','AdminController@login');
 Route::match(['get','post'],'/admin','AdminController@login');
 //Category Listing page
 Route::get('/products/{url}','ProductsController@productWithCategoryURL');
@@ -69,6 +69,13 @@ Route::group(['middleware' => ['auth']], function() {
     //ADD PRODUCT MULTIPLE IMAGE
     Route::match(['get','post'],'admin/add-images/{id}','ProductsController@addImages');
 
+    //ADD Coupon CODE Function
+    Route::match(['get','post'],'/admin/add-coupon','CouponsController@addCoupon');
+    Route::get('admin/view-coupons','CouponsController@viewCoupons');
+    Route::match(['get','post'],'/admin/edit-coupon/{id}','CouponsController@editCoupon');
+    Route::get('/admin/delete-coupon/{id}','CouponsController@deleteCoupon');
+
+
 });
 
 
@@ -76,5 +83,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'AdminController@logout');
 
 //Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -247,7 +247,7 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
-	 $('.deleteRecord').click(function(e){
+	$('.deleteRecord').click(function(e){
 		 let id = $(this).attr('rel');
 		 let deleteFunction = $(this).attr('rel1');
 		 swal({

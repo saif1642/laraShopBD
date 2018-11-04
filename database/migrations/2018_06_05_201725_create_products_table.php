@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->float('price');
             $table->string('image');
-            $table->integet('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

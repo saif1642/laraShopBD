@@ -15,7 +15,7 @@ class AdminController extends Controller
             $data = $request->input();
             //$authAdmin = User::where(['email' => $data['email'],'password'=> $data['password'],'admin'=>1])->first();
             //$authAdmin = json_decode(json_encode($authAdmin));
-            if(Auth::attempt(['email' => $data['email'],'password'=> $data['password']])){
+            if(Auth::attempt(['email' => $data['email'],'password'=> $data['password'],'admin'=>1])){
                 return redirect('/admin/dashboard');
             }else{
                 return redirect('/admin')->with('flash_message_error','Invalid Username or Password');
