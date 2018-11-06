@@ -46,10 +46,10 @@
                     <td>{{ $coupon->coupon_code }}</td>
                     <td>
                         {{ $coupon->amount }}
-                        @if($coupon->amount == "percentage")
-                         %
+                        @if($coupon->amount_type == "fixed")
+                         USD
                         @else
-                         USD 
+                         % 
                         @endif
                     </td>
                     <td>{{ $coupon->amount_type }}</td>

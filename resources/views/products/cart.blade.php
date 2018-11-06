@@ -11,7 +11,7 @@
         </div>
         <div class="table-responsive cart_info">
             @if(Session::has('flash_message_error'))     
-            <div class="alert alert-error alert-block">
+            <div class="alert alert-error alert-block" style="background-color:red;color:white">
                 <button type="button" class="close" data-dismiss="alert">x</button>
                 <strong>{!! Session('flash_message_error') !!}</strong>
             </div>
@@ -67,4 +67,46 @@
         </div>
     </div>
 </section> <!--/#cart_items-->
+
+<section id="do_action">
+    <div class="container">
+        <div class="heading">
+            <h3>What would you like to do next?</h3>
+            <p>Choose if you have a Coupon code you want to use.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="chose_area">
+                    <ul class="user_option">
+                        <li>
+                            <form action="{{url('/cart/apply-coupon')}}" method="POST">
+                                {{ csrf_field() }}
+                                <label>Use Coupon Code</label>
+                                <input type="text" name="coupon_code" class="form-control">
+                                <input type="submit" class="btn btn-default update" value="Apply Coupon" class="form-control">
+                            </form>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="total_area">
+                    <ul>
+                        @if(!empty(Session::get('CouponAmount')))
+                            <li>Sub Total <span>BDT <?php echo $total_amount; ?></span></li>
+                            <li>Coupon Discount <span>BDT <?php echo Session::get('CouponAmount'); ?></span></li>
+                            <li>Grand Total <span>BDT <?php echo $total_amount - Session::get('CouponAmount'); ?></span></li>
+                        @else
+                            <li>Grand Total <span>BDT <?php echo $total_amount; ?></span></li>
+                        @endif
+
+                    </ul>
+                        <a class="btn btn-default update" href="">Update</a>
+                        <a class="btn btn-default check_out" href="">Check Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

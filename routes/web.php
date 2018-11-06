@@ -38,6 +38,8 @@ Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
 //Update Quantity
 Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');
 
+Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
+
 
 
 Auth::routes();
