@@ -17,6 +17,7 @@ use App\Coupon;
 class ProductsController extends Controller
 {
     public function addProduct(Request $request){
+        
         if($request->isMethod('post')){
             $data = $request->all();
             //echo "<Pre>"; print_r($data);die;
