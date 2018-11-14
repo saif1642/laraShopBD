@@ -99,3 +99,68 @@ $('.toggle').on('click', function() {
 		api2._init();
 	}
 });
+//Existing user message
+$().ready(function(){
+	//validate on keyup and submit
+	$('#registerForm').validate({
+		rules:{
+			name:{
+				required:true,
+				minLength:2,
+				lettersonly:true
+			},
+			password:{
+				required:true,
+				minLength:6,
+
+			},
+			email:{
+				required:true,
+				email:true,
+				remote:"/check-email"
+			}
+		},
+		messages:{
+			name:"Please Enter Your name",
+			password:{
+				minLength:"Password must be 6 Characters long"
+			},
+			email:{
+				required:"please enter an email",
+				email:"Please enter a valid email",
+				remote:"Email already exists!"
+			}
+		}
+
+	});
+	$('#loginForm').validate({
+		rules:{
+			
+			password:{
+				required:true,
+
+			},
+			email:{
+				required:true,
+				email:true,
+			}
+		},
+		messages:{
+			password:"Please enter your password",
+			email:{
+				required:"please enter an email",
+				email:"Please enter a valid email",
+			}
+		}
+
+	});
+
+	$('#password').passtrength({
+		tooltip: true,
+		textWeak: "Weak",
+		textMedium: "Medium",
+		textStrong: "Strong",
+		textVeryStrong: "Very Strong",
+		eyeImg : "images/frontend_images/eye.svg"
+	});
+});

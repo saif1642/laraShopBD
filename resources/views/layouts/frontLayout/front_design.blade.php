@@ -14,6 +14,7 @@
 	<link href="{{ asset('css/frontend_css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/easyzoom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/frontend_css/passtrength.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
     <!--[if lt IE 9]>
@@ -38,10 +39,12 @@
 
     <script src="{{ asset('js/frontend_js/jquery.js') }}"></script>
     <script src="{{ asset('js/frontend_js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/jquery.validate.js') }}"></script> 
     <script src="{{ asset('js/frontend_js/jquery.scrollUp.min.js') }}"></script>
     <script src="{{ asset('js/frontend_js/price-range.js') }}"></script>
     <script src="{{ asset('js/frontend_js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('js/frontend_js/easyzoom.js') }}"></script>
     <script src="{{ asset('js/frontend_js/main.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/passtrength.js') }}"></script>
 </body>
 </html>

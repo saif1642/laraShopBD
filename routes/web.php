@@ -38,7 +38,13 @@ Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
 //Update Quantity
 Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');
 
+//Apply coupon
 Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
+
+//Check duplicate user
+Route::match(['GET','POST'],'/check-email','UsersController@checkEmail');
+
+
 
 
 
@@ -83,18 +89,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::match(['get','post'],'/admin/edit-banner/{id}','BannersController@editBanner');
     Route::get('/admin/delete-banner/{id}','BannersController@deleteBanner');
 
-
-
 });
 
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'AdminController@logout');
 
-//Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//User Module
+// Users Login/Register Page 
+Route::get('/login-register','UsersController@userLoginRegister');
+// Users Register Form Submit
+Route::post('/user-register','UsersController@register');
+//Logout
+Route::get('/user-logout','UsersController@logout'); 
+//User Login
+Route::post('user-login','UsersController@login');
