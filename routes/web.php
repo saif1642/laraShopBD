@@ -44,11 +44,9 @@ Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
 //Check duplicate user
 Route::match(['GET','POST'],'/check-email','UsersController@checkEmail');
 
-
-
-
-
 Auth::routes();
+
+
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/dashboard','AdminController@dashboard');
@@ -104,3 +102,10 @@ Route::post('/user-register','UsersController@register');
 Route::get('/user-logout','UsersController@logout'); 
 //User Login
 Route::post('user-login','UsersController@login');
+
+//Protected front route
+Route::group(['middleware' => ['frontLogin']], function() {
+    //User Account
+    Route::match(['get','post'],'account','UsersController@account');
+
+});

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Session; 
 class UsersController extends Controller
 {
     public function userLoginRegister(){
@@ -15,6 +16,7 @@ class UsersController extends Controller
             $data = $request->all();
             //dd($data);
             if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])){
+                Session::put('frontSession',$data['email']);
                 return redirect('/cart');
              }else{
                 return redirect()->back()->with('flash_message_error','Invalid Username and Password');
@@ -35,6 +37,7 @@ class UsersController extends Controller
                 $user->password = bcrypt($data['password']);
                 $user->save();
                 if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])){
+                    Session::put('frontSession',$data['email']);
                    return redirect('/cart');
                 }
             }
@@ -55,6 +58,10 @@ class UsersController extends Controller
     public function logout(){
         
         Auth::logout();
+        Session::forget('frontSession');
         return redirect('/');
+    }
+    public function account(){
+        return view('users.account');
     }
 }
